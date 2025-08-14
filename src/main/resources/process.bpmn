@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0dznbmp" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="process-logger" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0efmzic</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0efmzic" sourceRef="StartEvent_1" targetRef="Activity_16xdjfp" />
+    <bpmn:endEvent id="Event_024kuye">
+      <bpmn:incoming>Flow_1omuksk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_0piy41b" name="Application Intializer with values" camunda:delegateExpression="${workflowService}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="userDetails">
+            <camunda:script scriptFormat="javascript">var userDetails = {
+    id:userId,
+    name:userName,
+    gender:gender,
+    address: address,
+    phone:phoneNumber,
+    age:age,
+}
+
+JSON.stringify(userDetails);</camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="applicationName">
+            <camunda:script scriptFormat="javascript">var appliation = dbData.applicationName;
+appliation;</camunda:script>
+          </camunda:inputParameter>
+          <camunda:inputParameter name="loanAmount">
+            <camunda:script scriptFormat="javascript">var loan = loanAmount;
+loan;</camunda:script>
+          </camunda:inputParameter>
+          <camunda:outputParameter name="outputWorkflow">
+            <camunda:script scriptFormat="javascript">print("application running...");</camunda:script>
+          </camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1c4msml</bpmn:incoming>
+      <bpmn:outgoing>Flow_1omuksk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1omuksk" sourceRef="Activity_0piy41b" targetRef="Event_024kuye" />
+    <bpmn:sequenceFlow id="Flow_1c4msml" sourceRef="Activity_0ux9mbm" targetRef="Activity_0piy41b" />
+    <bpmn:sequenceFlow id="Flow_0wm0zus" sourceRef="Activity_16xdjfp" targetRef="Activity_0ux9mbm" />
+    <bpmn:scriptTask id="Activity_16xdjfp" name="Initalize DB values" scriptFormat="javascript" camunda:resultVariable="dbData">
+      <bpmn:incoming>Flow_0efmzic</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wm0zus</bpmn:outgoing>
+      <bpmn:script>var dbData = {
+    rateOfIntrest:9,
+    creditScore:700,
+    applicationName:"Loan approval workflow"
+}
+
+dbData;</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:serviceTask id="Activity_0ux9mbm" name="Fetch user Information by userId" camunda:delegateExpression="${userInformation}">
+      <bpmn:incoming>Flow_0wm0zus</bpmn:incoming>
+      <bpmn:outgoing>Flow_1c4msml</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:textAnnotation id="TextAnnotation_0gdowrt">
+      <bpmn:text>Intialize applicaiton with default values</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0wyh9u1" sourceRef="Activity_0piy41b" targetRef="TextAnnotation_0gdowrt" />
+    <bpmn:textAnnotation id="TextAnnotation_1n91p0f">
+      <bpmn:text>Pass userId to get user details</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0tzzs7d" sourceRef="Activity_0ux9mbm" targetRef="TextAnnotation_1n91p0f" />
+    <bpmn:textAnnotation id="TextAnnotation_1j03zz2">
+      <bpmn:text>Intialize values which supposed to be present in DB</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0c38vxz" sourceRef="Activity_16xdjfp" targetRef="TextAnnotation_1j03zz2" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="process-logger">
+      <bpmndi:BPMNShape id="TextAnnotation_0gdowrt_di" bpmnElement="TextAnnotation_0gdowrt">
+        <dc:Bounds x="750" y="50" width="120" height="41" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1n91p0f_di" bpmnElement="TextAnnotation_1n91p0f">
+        <dc:Bounds x="530" y="50" width="100" height="41" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1j03zz2_di" bpmnElement="TextAnnotation_1j03zz2">
+        <dc:Bounds x="280" y="50" width="180" height="41" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0efmzic_di" bpmnElement="Flow_0efmzic">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="270" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1omuksk_di" bpmnElement="Flow_1omuksk">
+        <di:waypoint x="780" y="177" />
+        <di:waypoint x="842" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1c4msml_di" bpmnElement="Flow_1c4msml">
+        <di:waypoint x="570" y="177" />
+        <di:waypoint x="680" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wm0zus_di" bpmnElement="Flow_0wm0zus">
+        <di:waypoint x="370" y="177" />
+        <di:waypoint x="470" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_024kuye_di" bpmnElement="Event_024kuye">
+        <dc:Bounds x="842" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1btlv42_di" bpmnElement="Activity_0piy41b">
+        <dc:Bounds x="680" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0d19d8b_di" bpmnElement="Activity_16xdjfp">
+        <dc:Bounds x="270" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1pbd5cx_di" bpmnElement="Activity_0ux9mbm">
+        <dc:Bounds x="470" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0wyh9u1_di" bpmnElement="Association_0wyh9u1">
+        <di:waypoint x="756" y="137" />
+        <di:waypoint x="787" y="91" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0tzzs7d_di" bpmnElement="Association_0tzzs7d">
+        <di:waypoint x="541" y="137" />
+        <di:waypoint x="566" y="91" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0c38vxz_di" bpmnElement="Association_0c38vxz">
+        <di:waypoint x="338" y="137" />
+        <di:waypoint x="358" y="91" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
