@@ -2,9 +2,9 @@
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="check-eligibility" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
   <decision id="loan_eligibility_dmn" name="Check loan eligibility">
     <decisionTable id="DecisionTable_0s6u8r0">
-      <input id="Input_1" label="Loan amount &#60;= 50,00,000 INR" biodi:width="257" camunda:inputVariable="isValid">
+      <input id="Input_1" label="Loan amount &#60;= 5,00,000 INR" biodi:width="257" camunda:inputVariable="isValid">
         <inputExpression id="InputExpression_1" typeRef="boolean" expressionLanguage="javascript">
-          <text>var isWithinLimit = loanAmount &lt;= 5000000 ? true : false;
+          <text>var isWithinLimit = loanAmount &lt;= 500000 ? true : false;
 isWithinLimit;</text>
         </inputExpression>
       </input>
