@@ -28,7 +28,7 @@ public class UserInformation implements JavaDelegate {
         execution.setVariable("address", "XYZ india");
         execution.setVariable("userId", 123);
         execution.setVariable("creditScore", 750);
-        execution.setVariable("age", "19");
+        execution.setVariable("age", 19);
         execution.setVariable("gender", "Male");
         execution.setVariable("phoneNumber", "+91-1234567890");
     }

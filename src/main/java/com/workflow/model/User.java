@@ -9,6 +9,15 @@ public class User {
     private String address;
     private Integer creditScore = 0;
     private String gender;
+    private Integer loanAmount;
+
+    public Integer getLoanAmount() {
+        return loanAmount;
+    }
+
+    public void setLoanAmount(Integer loanAmount) {
+        this.loanAmount = loanAmount;
+    }
 
     public Integer getCreditScore() {
         return creditScore;
