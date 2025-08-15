@@ -4,7 +4,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0bcwwlm</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="Activity_14s1pnx" name="Send Approval Email" camunda:delegateExpression="${approvalEmail}">
+    <bpmn:serviceTask id="Activity_14s1pnx" name="Send Approval Email" camunda:delegateExpression="${emailNotificationService}">
       <bpmn:incoming>Flow_0bcwwlm</bpmn:incoming>
       <bpmn:outgoing>Flow_0pzo3ef</bpmn:outgoing>
     </bpmn:serviceTask>

@@ -23,7 +23,7 @@ public class UserInformation implements JavaDelegate {
         String newApiUrl = apiUrl.replace("USER_ID", String.valueOf(123));
         ResponseEntity<User> response = restTemplate.getForEntity(newApiUrl, User.class);
         System.out.println("Response of user info : " + response.getBody());
-        execution.setVariable("loanAmount", 50000);
+        execution.setVariable("loanAmount", 1100000);
         execution.setVariable("userName", "Om Prakash");
         execution.setVariable("address", "XYZ india");
         execution.setVariable("userId", 123);

@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class ApprovalEmail implements JavaDelegate {
+public class EmailNotificationService implements JavaDelegate {
 
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String approvalUrl = "http://localhost:8081/loan/send-email";
+    private final String approvalUrl = "http://localhost:8081/loan/send-notification";
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
@@ -34,11 +34,12 @@ public class ApprovalEmail implements JavaDelegate {
         LoanRequest loanRequest = new LoanRequest();
         loanRequest.setEligibleForLoan(true);
         loanRequest.setUser(user);
+        loanRequest.setNotificationType((String) execution.getVariable("notificationType"));
 
         HttpEntity<LoanRequest> httpEntity = new HttpEntity<>(loanRequest);
         ResponseEntity<String> response = restTemplate.postForEntity(approvalUrl,httpEntity,String.class);
 
-        System.out.println("Approval rest template response : " + response.getBody());
+        System.out.println("Notification REST api response : " + response.getBody());
 
     }
 }
