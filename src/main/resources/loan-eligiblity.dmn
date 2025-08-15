@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="check-eligibility" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <decision id="loan_eligibility_dmn" name="Check loan eligibility">
+    <decisionTable id="DecisionTable_0s6u8r0">
+      <input id="Input_1" label="Loan amount &#60;= 50,00,000 INR" biodi:width="257" camunda:inputVariable="isValid">
+        <inputExpression id="InputExpression_1" typeRef="boolean" expressionLanguage="javascript">
+          <text>var isWithinLimit = loanAmount &lt;= 5000000 ? true : false;
+isWithinLimit;</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1m4vz7g" label="Credit score above 700" camunda:inputVariable="isGoodCreditScore">
+        <inputExpression id="LiteralExpression_1l5iay6" typeRef="boolean" expressionLanguage="javascript">
+          <text>var isCreditScoreAbove = creditScore &gt; 700 ? true : false;
+isCreditScoreAbove;</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Eligibility status" name="eligibilityStatus" typeRef="string" />
+      <rule id="DecisionRule_0n62dcn">
+        <inputEntry id="UnaryTests_1vbkl8y">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qwkto0">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1sz7zmt">
+          <text>"Approved"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0y9j1yq">
+        <inputEntry id="UnaryTests_1276yvq">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_174m2c0">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1daw0y0">
+          <text>"Manual"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ele3ya">
+        <inputEntry id="UnaryTests_1gg048m">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1kwg4i8">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1sjp1t4">
+          <text>"Rejected"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="loan_eligibility_dmn">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
