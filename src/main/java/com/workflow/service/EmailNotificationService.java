@@ -1,6 +1,6 @@
 package com.workflow.service;
 
-import com.workflow.model.LoanRequest;
+import com.workflow.dto.LoanRequestDTO;
 import com.workflow.model.User;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -31,12 +31,12 @@ public class EmailNotificationService implements JavaDelegate {
         user.setPhoneNumber((String) execution.getVariable("phoneNumber"));
         user.setLoanAmount((Integer) execution.getVariable("loanAmount"));
 
-        LoanRequest loanRequest = new LoanRequest();
-        loanRequest.setIsEligibleForLoan(true);
-        loanRequest.setUser(user);
-        loanRequest.setNotificationType((String) execution.getVariable("notificationType"));
+        LoanRequestDTO loanRequestDTO = new LoanRequestDTO();
+        loanRequestDTO.setIsEligibleForLoan(true);
+        loanRequestDTO.setUser(user);
+        loanRequestDTO.setNotificationType((String) execution.getVariable("notificationType"));
 
-        HttpEntity<LoanRequest> httpEntity = new HttpEntity<>(loanRequest);
+        HttpEntity<LoanRequestDTO> httpEntity = new HttpEntity<>(loanRequestDTO);
         ResponseEntity<String> response = restTemplate.postForEntity(approvalUrl, httpEntity, String.class);
         System.out.println();
         System.out.println("___________________________________________________");

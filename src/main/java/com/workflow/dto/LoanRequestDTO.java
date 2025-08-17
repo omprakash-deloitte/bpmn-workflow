@@ -1,5 +1,6 @@
-package com.workflow.model;
+package com.workflow.dto;
 
+import com.workflow.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoanRequest {
+public class LoanRequestDTO {
     private User user;
     private Boolean isEligibleForLoan;
     private Integer loanAmount;
