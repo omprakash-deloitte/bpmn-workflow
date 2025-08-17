@@ -15,21 +15,17 @@ public class WorkflowService implements JavaDelegate {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String apiUrl = "http://localhost:8081/loan/create-request?userName=USER_NAME";
-
     @Override
     public void execute(DelegateExecution execution) throws Exception {
+        System.out.println();
+        System.out.println("=============================================");
         System.out.println("Application Name : " + execution.getVariable("applicationName"));
-        System.out.println("Loan Date : " + execution.getVariable("loanDate"));
-        System.out.println("Loan Amount : " + execution.getVariable("loanAmount"));
-        System.out.println("User Details : " + execution.getVariable("userDetails"));
         System.out.println("User Name : " + execution.getVariable("userName"));
-
-        String newApiUrl = apiUrl.replace("USER_NAME", (String)execution.getVariable("userName"));
-
-        HttpEntity<String> httpEntity = new HttpEntity<>("");
-        ResponseEntity<?> response = restTemplate.postForEntity(newApiUrl,httpEntity,String.class);
-        System.out.println("Rest Template response " + response.getBody());
-
+        System.out.println("User Id : " + execution.getVariable("userId"));
+        System.out.println("Loan Amount : " + execution.getVariable("loanAmount"));
+        System.out.println("Credit Score : " + execution.getVariable("creditScore"));
+        System.out.println("User Details : " + execution.getVariable("userDetails"));
+        System.out.println("=============================================");
+        System.out.println();
     }
 }

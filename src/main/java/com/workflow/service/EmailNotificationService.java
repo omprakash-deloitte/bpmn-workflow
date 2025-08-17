@@ -32,14 +32,16 @@ public class EmailNotificationService implements JavaDelegate {
         user.setLoanAmount((Integer) execution.getVariable("loanAmount"));
 
         LoanRequest loanRequest = new LoanRequest();
-        loanRequest.setEligibleForLoan(true);
+        loanRequest.setIsEligibleForLoan(true);
         loanRequest.setUser(user);
         loanRequest.setNotificationType((String) execution.getVariable("notificationType"));
 
         HttpEntity<LoanRequest> httpEntity = new HttpEntity<>(loanRequest);
-        ResponseEntity<String> response = restTemplate.postForEntity(approvalUrl,httpEntity,String.class);
-
+        ResponseEntity<String> response = restTemplate.postForEntity(approvalUrl, httpEntity, String.class);
+        System.out.println();
+        System.out.println("___________________________________________________");
         System.out.println("Notification REST api response : " + response.getBody());
-
+        System.out.println("___________________________________________________");
+        System.out.println();
     }
 }

@@ -10,7 +10,7 @@ isWithinLimit;</text>
       </input>
       <input id="InputClause_1m4vz7g" label="Credit score above 700" camunda:inputVariable="isGoodCreditScore">
         <inputExpression id="LiteralExpression_1l5iay6" typeRef="boolean" expressionLanguage="javascript">
-          <text>var isCreditScoreAbove = creditScore &gt; 700 ? true : false;
+          <text>var isCreditScoreAbove = creditScore &gt;= 700 ? true : false;
 isCreditScoreAbove;</text>
         </inputExpression>
       </input>
